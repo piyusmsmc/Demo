@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concatenate Strings</title>
+</head>
+<body>
+    <h1>Concatenate Strings</h1>
+    <form id="concatForm">
+        <input type="text" id="string1" placeholder="String 1" required>
+        <input type="text" id="string2" placeholder="String 2" required>
+        <input type="text" id="string3" placeholder="String 3" required>
+        <button type="submit">Concatenate</button>
+    </form>
+    <h2>Response</h2>
+    <pre id="response"></pre>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('concatForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const string1 = document.getElementById('string1').value;
+            const string2 = document.getElementById('string2').value;
+            const string3 = document.getElementById('string3').value;
+
+            const url = `http://127.0.0.1:5000/concatenate?string1=${encodeURIComponent(string1)}&string2=${encodeURIComponent(string2)}&string3=${encodeURIComponent(string3)}`;
+
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+                document.getElementById('result').textContent = `Concatenated String: ${data.concatenated_string}`;
+            })
+            .catch(error => {
+                document.getElementById('response').textContent = `Error: ${error}`;
+                document.getElementById('result').textContent = 'Error: Unable to concatenate strings.';
+            });
+        });
+    </script>
+</body>
+</html>
