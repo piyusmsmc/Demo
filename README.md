@@ -1,5 +1,5 @@
 # Demo
 <BR>
-Firse file
+First file
 <BR>
-Auther Piyush Srivastava
+Author Piyush Srivastava
